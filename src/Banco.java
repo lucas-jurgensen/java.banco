@@ -80,23 +80,71 @@ public class Banco {
         }
     }
 
-    public void buscarConta(String cpf) {
+    public Conta buscarConta(String cpf) {
         if (contas.isEmpty()) {
             System.out.println("não existem contas cadastradas no banco");
-            return;
+            return null;
         }
 
         for (Conta conta : contas) {
             if (conta.getCliente().getCpf().equals(cpf)) {
                 System.out.println(conta.getCliente().getNome() + " - saldo: R$ " + conta.getSaldo() + " - " + conta.getToken_conta());
-                return;
+                return conta;
             }
         }
-        System.out.println("não foi encontrada uma conta com esse token");
+        System.out.println("não foi encontrada uma conta com esse cpf");
+        return null;
     }
 
     //todo - pix / deposito / saque
 
+    //interação entre contas
+    public void depositarSaldo(String cpf, float saldo) {
+        Conta conta = buscarConta(cpf);
+
+        if (conta == null) {
+            return;
+        }
+
+        if (saldo <= 0) {
+            System.out.println("saldo inválido para depósito");
+            return;
+        }
+
+        conta.addSaldo(saldo);
+    }
+
+    public void sacarSaldo(String cpf, float saldo) {
+        Conta conta = buscarConta(cpf);
+
+        if (conta == null) {
+            return;
+        }
+
+        if (saldo <= 0) {
+            System.out.println("saldo inválido para depósito");
+            return;
+        }
+
+        conta.removeSaldo(saldo);
+    }
+
+    public void transferirSaldo(String cpf_o, String cpf_d, float saldo) {
+        Conta conta_o = buscarConta(cpf_o);
+        Conta conta_d = buscarConta(cpf_d);
+
+        if (conta_o == null || conta_d == null) {
+            return;
+        }
+
+        if (saldo <= 0) {
+            System.out.println("saldo inválido para depósito");
+            return;
+        }
+
+        conta_o.removeSaldo(saldo);
+        conta_d.addSaldo(saldo);
+    }
 }
 
 

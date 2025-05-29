@@ -35,7 +35,7 @@ public class Conta {
 
     public void removeSaldo(float saldo_rm) {
         if (saldo_rm <= 0 || saldo_rm > this.saldo) {
-            System.out.println("o saldo a ser removido precisa ser válido");
+            System.out.println("saldo insuficiente");
             return;
         }
 

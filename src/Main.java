@@ -13,6 +13,9 @@ public class Main {
             System.out.println("[4] - criar conta");
             System.out.println("[5] - listar contas");
             System.out.println("[6] - buscar conta");
+            System.out.println("[7] - depositar saldo");
+            System.out.println("[8] - sacar saldo");
+            System.out.println("[9] - transferir saldo");
             System.out.println("[0] - sair");
 
             int opcao = sc.nextInt();
@@ -81,6 +84,57 @@ public class Main {
                     }
 
                     banco.buscarConta(cpf);
+                    break;
+                }
+
+                case 7: {
+                    System.out.println("digite o cpf do cliente dono da conta: ");
+                    String cpf = sc.nextLine();
+                    System.out.println("informe o saldo a ser depositado: ");
+                    float saldo = sc.nextFloat();
+                    sc.nextLine();
+
+                    if (cpf.isBlank()) {
+                        System.out.println("o cpf deve ser informado");
+                        break;
+                    }
+
+                    banco.depositarSaldo(cpf, saldo);
+                    break;
+                }
+
+                case 8: {
+                    System.out.println("digite o cpf do cliente dono da conta: ");
+                    String cpf = sc.nextLine();
+                    System.out.println("informe o saldo desejado para sacar: ");
+                    float saldo = sc.nextFloat();
+                    sc.nextLine();
+
+                    if (cpf.isBlank()) {
+                        System.out.println("o cpf deve ser informado");
+                        break;
+                    }
+
+                    banco.sacarSaldo(cpf, saldo);
+                    break;
+                }
+
+                case 9: {
+                    System.out.println("digite o cpf da conta origem: ");
+                    String cpf_o = sc.nextLine();
+                    System.out.println("digite o cpf da conta destino: ");
+                    String cpf_d = sc.nextLine();
+                    System.out.println("digite o saldo a ser transferido: ");
+                    float saldo = sc.nextFloat();
+                    sc.nextLine();
+
+
+                    if (cpf_o.isBlank() || cpf_d.isBlank()) {
+                        System.out.println("o cpf deve ser informado");
+                        break;
+                    }
+
+                    banco.transferirSaldo(cpf_o, cpf_d, saldo);
                     break;
                 }
 
