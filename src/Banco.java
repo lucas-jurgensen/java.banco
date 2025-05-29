@@ -142,8 +142,16 @@ public class Banco {
             return;
         }
 
-        conta_o.removeSaldo(saldo);
-        conta_d.addSaldo(saldo);
+        if (conta_o.removeSaldo(saldo)) {
+            if (conta_d.addSaldo(saldo)) {
+                System.out.println("transferência concluida");
+            } else {
+                conta_o.addSaldo(saldo);
+                System.out.println("transferência cancelada devido a um erro");
+            }
+        } else {
+            System.out.println("saldo insuficiente");
+        }
     }
 }
 

@@ -24,22 +24,24 @@ public class Conta {
         return saldo;
     }
 
-    public void addSaldo(float saldo_add) {
+    public boolean addSaldo(float saldo_add) {
         if (saldo_add <= 0) {
             System.out.println("o saldo a ser adicionado precisa ser válido");
-            return;
+            return false;
         }
 
         this.saldo += saldo_add;
+        return true;
     }
 
-    public void removeSaldo(float saldo_rm) {
+    public boolean removeSaldo(float saldo_rm) {
         if (saldo_rm <= 0 || saldo_rm > this.saldo) {
             System.out.println("saldo insuficiente");
-            return;
+            return false;
         }
 
         this.saldo -= saldo_rm;
+        return true;
     }
 
     @Override
